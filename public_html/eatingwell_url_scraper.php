@@ -22,19 +22,15 @@ for( $i=0; $i< 100; $i++ ){
   if( !$existing ){
     $url = "http://www.eatingwell.com/recipes/?page=$page_id";
     $crawler = $client->request('GET', $url);
-    d($crawler->html());
-    exit;
-
-    $ingredients = array();
-    $title = "";
-    $crawler->filter('h3[itemprop="name"]')->each(function ($node) {
+    $urls = array();
+    $crawler->filter('a[data-internal-referrer-link="recipe hub"]')->each(function ($node) {
       global $title;
+      d($node,$node->html());
+      exit;
       $title = $node->html();
     });
-    $crawler->filter('span[itemprop="ingredients"]')->each(function ($node) {
-      global $ingredients;
-      $ingredients[] = $node->html();
-    });
+
+    exit;
 
     $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url) VALUES (?,?,?)" );
     $r_q->execute([$page_id,$title,$url]);
