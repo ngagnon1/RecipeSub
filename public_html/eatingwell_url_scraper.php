@@ -4,7 +4,7 @@ require_once( $_SERVER['DOCUMENT_ROOT'].'/includes/autoload.php' );
 
 use Goutte\Client;
 
-$conn = DbConn::getConn();
+$pdo = DbConn::getPdo();
 
 $client = new Client();
 $gzl = new GuzzleHttp\Client( array(
@@ -15,7 +15,11 @@ $gzl = new GuzzleHttp\Client( array(
 $client->setClient($gzl);
 
 for( $i=0; $i< 100; $i++ ){
+  $statement = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE RecipeNumber=?");
   $recipe_id = 261291+$i;
+  $statement->execute($recipe_id);
+  d($statement->fetch());
+  exit;
   $crawler = $client->request('GET', "http://www.eatingwell.com/recipe/$recipe_id");
 
   $ingredients = array();
