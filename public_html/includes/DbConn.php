@@ -16,6 +16,8 @@ class DbConn {
   ];
 
   public static function getConn(){
+    d('asdf');
+    exit;
     if( static::$conn == NULL ){
       static::$conn = new PDO($dsn, $user, $pass, $opt);
     }
