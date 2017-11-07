@@ -39,20 +39,8 @@ for( $i=0; $i< 100; $i++ ){
           $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url,PageNumber) VALUES (?,?,?,?)" );
           $r_q->execute([$page_id,NULL,$url,$page_id]);
         }
-        exit;
-    });
-
-    exit;
-
-    $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url) VALUES (?,?,?)" );
-    $r_q->execute([$page_id,$title,$url]);
-    $r_id = $pdo->lastInsertId();
-    $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
-    if( count($ingredients) ){
-      foreach( $ingredients as $i ){
-        $i_q->execute([(int)$r_id,$i]);
       }
-    }
+    });
   }
 }
 
