@@ -13,13 +13,13 @@ $gzl = new GuzzleHttp\Client( array(
   ),
 ) );
 $client->setClient($gzl);
-$recipes_q = $pdo->query("SELECT * FROM EatingWellRecipe WHERE RecipeName IS NULL");
+$recipes_q = $pdo->query("SELECT * FROM EatingWellRecipe LEFT JOIN EatingWellRecipeIngredient ON EatingWellRecipeIngredient.EatingWellRecipeId = EatingWellRecipe.EatingWellRecipeId WHERE RecipeName IS NULL AND EatingWellRecipeIngredientId IS NULL");
 
 while( $row = $recipes_q->fetch() ){
   d($row);
   exit;
   $statement = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE RecipeNumber=?");
-  $recipe_id = 261291+$i;
+  $recipe_id = (int)$row['RecipeNumber'];
   $statement->execute([$recipe_id]);
   $existing = $statement->fetch();
   if( !$existing ){
