@@ -28,5 +28,4 @@
     "scripts": {
         "compile": "php compile.php"
     }
-
 }
