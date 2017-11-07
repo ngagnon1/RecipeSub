@@ -6,4 +6,6 @@ spl_autoload_register(function ($class_name) {
   $fname = "{$_SERVER['DOCUMENT_ROOT']}/includes/$class_name.php";
   if( file_exists($fname) )
     require_once $fname;
+  echo $fname;
+  exit;
 });
