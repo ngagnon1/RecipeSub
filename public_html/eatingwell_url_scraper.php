@@ -37,7 +37,7 @@ for( $i=0; $i< 100; $i++ ){
 
     $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url) VALUES (?,?,?)" );
     $r_q->execute([$recipe_id,$title,$url]);
-    $r_id = PDO::lastInsertId;
+    $r_id = PDO::$lastInsertId;
     d($r_id);
     $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
     foreach( $ingredients as $i ){
