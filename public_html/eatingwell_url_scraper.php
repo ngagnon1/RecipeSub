@@ -6,7 +6,6 @@ use Goutte\Client;
 
 echo 'asdf';
 
-exit;
 $conn = DbConn::getConn();
 d($conn);
 exit;
