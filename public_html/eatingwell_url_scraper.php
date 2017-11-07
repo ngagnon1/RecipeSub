@@ -25,8 +25,10 @@ for( $i=0; $i< 100; $i++ ){
     $urls = array();
     $crawler->filter('a[data-internal-referrer-link="recipe hub"]')->each(function ($node) {
       $url = $node->attr("href");
-      if( preg_match( '/\/recipe\/[0-9]+/', $url ) ){
-        d($url);
+      $id_pattern = '.*/\/recipe\/([0-9]+).*/';
+      if( preg_match( $id_pattern, $url ) ){
+        $id = preg_replace( $id_pattern, '$1', $url );
+        d($url,$id);
         exit;
       } 
     });
