@@ -5,8 +5,6 @@ require_once( $_SERVER['DOCUMENT_ROOT'].'/includes/autoload.php' );
 use Goutte\Client;
 
 $conn = DbConn::getConn();
-d($conn);
-exit;
 
 $client = new Client();
 $gzl = new GuzzleHttp\Client( array(
