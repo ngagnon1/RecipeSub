@@ -13,40 +13,31 @@ $gzl = new GuzzleHttp\Client( array(
   ),
 ) );
 $client->setClient($gzl);
-$recipes_q = $pdo->query("SELECT * FROM EatingWellRecipe LEFT JOIN EatingWellRecipeIngredient ON EatingWellRecipeIngredient.EatingWellRecipeId = EatingWellRecipe.EatingWellRecipeId WHERE RecipeName IS NULL AND EatingWellRecipeIngredientId IS NULL");
+$recipes_q = $pdo->query("SELECT EatingWellRecipe.* FROM EatingWellRecipe LEFT JOIN EatingWellRecipeIngredient ON EatingWellRecipeIngredient.EatingWellRecipeId = EatingWellRecipe.EatingWellRecipeId WHERE RecipeName IS NULL AND EatingWellRecipeIngredientId IS NULL");
 
 while( $row = $recipes_q->fetch() ){
-  d($row);
-  exit;
-  $statement = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE RecipeNumber=?");
-  $recipe_id = (int)$row['RecipeNumber'];
-  $statement->execute([$recipe_id]);
-  $existing = $statement->fetch();
-  if( !$existing ){
-    $url = "http://www.eatingwell.com/recipe/$recipe_id";
-    $crawler = $client->request('GET', $url);
 
-    $ingredients = array();
-    $title = "";
-    $crawler->filter('h3[itemprop="name"]')->each(function ($node) {
-      global $title;
-      $title = $node->html();
-    });
-    $crawler->filter('span[itemprop="ingredients"]')->each(function ($node) {
-      global $ingredients;
-      $ingredients[] = $node->html();
-    });
+  $url = $row['Url'];
+  $crawler = $client->request('GET', $url);
 
-    $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url) VALUES (?,?,?)" );
-    $r_q->execute([$recipe_id,$title,$url]);
-    $r_id = $pdo->lastInsertId();
-    $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
-    if( count($ingredients) ){
-      foreach( $ingredients as $i ){
-        $i_q->execute([(int)$r_id,$i]);
-      }
+  $ingredients = array();
+  $title = "";
+  $crawler->filter('h3[itemprop="name"]')->each(function ($node) {
+    global $title;
+    $title = $node->html();
+  });
+  $crawler->filter('span[itemprop="ingredients"]')->each(function ($node) {
+    global $ingredients;
+    $ingredients[] = $node->html();
+  });
+
+  $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
+  if( count($ingredients) ){
+    foreach( $ingredients as $i ){
+      $i_q->execute([(int)$row['EatingWellRecipeId'],$i]);
     }
   }
+  exit;
 }
 
 
