@@ -37,8 +37,6 @@ for( $i=0; $i< 100; $i++ ){
         if( !$existing_r ){
           $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url,PageNumber) VALUES (?,?,?,?)" );
           $r_q->execute([$id,NULL,$url,$page_id]);
-          d($id);
-          exit;
         }
       }
     });
