@@ -24,7 +24,7 @@ for( $i=0; $i< 100; $i++ ){
   d($ingredients);
   
   d($crawler
-    $crawler->html()
+    ,$crawler->html()
   );
   exit;
 }
