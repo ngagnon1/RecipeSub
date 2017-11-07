@@ -40,10 +40,12 @@ for( $i=0; $i< 100; $i++ ){
     $r_id = $pdo->lastInsertId();
     d($r_id);
     $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
-    foreach( $ingredients as $i ){
-      d($i,$r_id);
-      exit;
-      $i_q->execute([$r_id,$i]);
+    if( count($ingredients) ){
+      foreach( $ingredients as $i ){
+        d($i,$r_id);
+        exit;
+        $i_q->execute([$r_id,$i]);
+      }
     }
     
     d($crawler
