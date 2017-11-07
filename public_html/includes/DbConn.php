@@ -16,8 +16,6 @@ class DbConn {
   ];
 
   public static function getConn(){
-    d('fdsa');
-    exit;
     if( static::$conn == NULL ){
       static::$conn = new PDO($dsn, $user, $pass, $opt);
     }
