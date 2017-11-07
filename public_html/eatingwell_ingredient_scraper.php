@@ -31,6 +31,9 @@ while( $row = $recipes_q->fetch() ){
     $ingredients[] = $node->html();
   });
 
+  $u_q = $pdo->prepare( "UPDATE EatingWellRecipe SET RecipeName=? WHERE EatingWellRecipeId=?" );
+  $u_q->execute([$title,(int)$row['EatingWellRecipeId']]);
+
   $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
   if( count($ingredients) ){
     foreach( $ingredients as $i ){
