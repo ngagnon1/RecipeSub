@@ -16,7 +16,7 @@ $gzl = new GuzzleHttp\Client( array(
 ) );
 $client->setClient($gzl);
 
-for( $i=100; $i< 200; $i++ ){
+for( $i=200; $i< 2000; $i++ ){
   $statement = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE PageNumber=?");
   $page_id = $i;
   $statement->execute([$page_id]);
