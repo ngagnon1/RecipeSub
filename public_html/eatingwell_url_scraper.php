@@ -24,14 +24,11 @@ for( $i=0; $i< 100; $i++ ){
     $crawler = $client->request('GET', $url);
     $urls = array();
     $crawler->filter('a[data-internal-referrer-link="recipe hub"]')->each(function ($node) {
-      global $title;
-      d(
-        $node
-        ,$node->html()
-        ,$node->attr("href")
-      );
-      exit;
-      $title = $node->html();
+      $url = $node->attr("href");
+      if( preg_match( '/\/recipe\/[0-9]+/', $url ) ){
+        d($url);
+        exit;
+      } 
     });
 
     exit;
