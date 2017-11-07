@@ -19,7 +19,6 @@ for( $i=0; $i< 100; $i++ ){
   $recipe_id = 261291+$i;
   $statement->execute([$recipe_id]);
   $existing = $statement->fetch();
-  d($existing);
   if( !$existing ){
     $url = "http://www.eatingwell.com/recipe/$recipe_id";
     $crawler = $client->request('GET', $url);
@@ -38,16 +37,12 @@ for( $i=0; $i< 100; $i++ ){
     $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url) VALUES (?,?,?)" );
     $r_q->execute([$recipe_id,$title,$url]);
     $r_id = $pdo->lastInsertId();
-    d($r_id);
     $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
     if( count($ingredients) ){
       foreach( $ingredients as $i ){
         $i_q->execute([(int)$r_id,$i]);
       }
     }
-    
-    d($crawler);
-    exit;
   }
 }
 
