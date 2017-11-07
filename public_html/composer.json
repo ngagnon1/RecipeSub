@@ -1,2 +1,7 @@
 {
+    "require": {
+        "raveren/kint": "^1.1",
+        "fguillot/picofeed": "@stable",
+        "fabpot/goutte": "^3.2"
+    }
 }
