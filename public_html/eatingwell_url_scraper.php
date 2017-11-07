@@ -41,6 +41,8 @@ for( $i=0; $i< 100; $i++ ){
     d($r_id);
     $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
     foreach( $ingredients as $i ){
+      d($i,$r_id);
+      exit;
       $i_q->execute([$r_id,$i]);
     }
     
