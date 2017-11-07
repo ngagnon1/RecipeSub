@@ -13,10 +13,7 @@ $gzl = new GuzzleHttp\Client( array(
   ),
 ) );
 $client->setClient($gzl);
-$recipes_q = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE RecipeName IS NULL");
-$row = $row = $recipes_q->fetch();
-d($row);
-exit;
+$recipes_q = $pdo->query("SELECT * FROM EatingWellRecipe WHERE RecipeName IS NULL");
 
 while( $row = $recipes_q->fetch() ){
   d($row);
