@@ -1,5 +1,7 @@
 <?php
 
+error_reporting( E_ALL );
+
 require_once( $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php' );
 
 spl_autoload_register(function ($class_name) {
