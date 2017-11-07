@@ -48,9 +48,7 @@ for( $i=0; $i< 100; $i++ ){
       }
     }
     
-    d($crawler
-      ,$crawler->html()
-    );
+    d($crawler);
     exit;
   }
 }
