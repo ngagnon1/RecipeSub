@@ -15,13 +15,15 @@ $gzl = new GuzzleHttp\Client( array(
 $client->setClient($gzl);
 
 for( $i=0; $i< 100; $i++ ){
-  $statement = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE RecipeNumber=?");
-  $recipe_id = 261291+$i;
-  $statement->execute([$recipe_id]);
+  $statement = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE PageNumber=?");
+  $page_id = $i;
+  $statement->execute([$page_id]);
   $existing = $statement->fetch();
   if( !$existing ){
-    $url = "http://www.eatingwell.com/recipe/$recipe_id";
+    $url = "http://www.eatingwell.com/recipes/?page=$page_id";
     $crawler = $client->request('GET', $url);
+    d($crawler->html());
+    exit;
 
     $ingredients = array();
     $title = "";
@@ -35,7 +37,7 @@ for( $i=0; $i< 100; $i++ ){
     });
 
     $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url) VALUES (?,?,?)" );
-    $r_q->execute([$recipe_id,$title,$url]);
+    $r_q->execute([$page_id,$title,$url]);
     $r_id = $pdo->lastInsertId();
     $i_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredient (EatingWellRecipeId,IngredientText) VALUES (?,?)" );
     if( count($ingredients) ){
