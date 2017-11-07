@@ -30,6 +30,8 @@ for( $i=0; $i< 100; $i++ ){
         $id = preg_replace( $id_pattern, '$1', $url );
         d($url,$id);
 
+        exit;
+
         $rc_q = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE RecipeNumber=?");
         $rc_q->execute([(int)$id]);
         $existing_r = $rc_q->fetch();
