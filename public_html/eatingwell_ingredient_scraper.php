@@ -37,7 +37,6 @@ while( $row = $recipes_q->fetch() ){
       $i_q->execute([(int)$row['EatingWellRecipeId'],$i]);
     }
   }
-  exit;
 }
 
 
