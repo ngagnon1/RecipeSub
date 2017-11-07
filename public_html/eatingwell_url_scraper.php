@@ -25,7 +25,11 @@ for( $i=0; $i< 100; $i++ ){
     $urls = array();
     $crawler->filter('a[data-internal-referrer-link="recipe hub"]')->each(function ($node) {
       global $title;
-      d($node,$node->html());
+      d(
+        $node
+        ,$node->html()
+        ,$node->attr("href")
+      );
       exit;
       $title = $node->html();
     });
