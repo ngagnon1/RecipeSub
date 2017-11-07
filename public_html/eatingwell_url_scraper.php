@@ -29,8 +29,14 @@ for( $i=0; $i< 100; $i++ ){
       if( preg_match( $id_pattern, $url ) ){
         $id = preg_replace( $id_pattern, '$1', $url );
         d($url,$id);
-        exit;
-      } 
+
+        $rc_q = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE RecipeNumber=?");
+        $rc_q->execute([(int)$id]);
+        $existing_r = $rc_q->fetch();
+        if( !$existing_r ){
+          $r_q = $pdo->prepare( "INSERT INTO EatingWellRecipe (RecipeNumber,RecipeName,Url,PageNumber) VALUES (?,?,?,?)" );
+          $r_q->execute([$page_id,NULL,$url,$page_id]);
+        }
     });
 
     exit;
