@@ -23,7 +23,9 @@ for( $i=0; $i< 100; $i++ ){
   });
   d($ingredients);
   
-  d($crawler);
+  d($crawler
+    $crawler->html()
+  );
   exit;
 }
 
