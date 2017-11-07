@@ -15,7 +15,7 @@ class DbConn {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
     ];
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $dsn = "mysql:host=".static::$host.";dbname=".static::$db.";charset=".static::$charset;
     if( static::$conn == NULL ){
       static::$conn = new PDO($dsn, static::$user, static::$pass, $opt);
     }
