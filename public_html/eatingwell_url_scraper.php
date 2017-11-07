@@ -23,7 +23,7 @@ for( $i=0; $i< 100; $i++ ){
     $url = "http://www.eatingwell.com/recipes/?page=$page_id";
     $crawler = $client->request('GET', $url);
     $urls = array();
-    $crawler->filter('a[data-internal-referrer-link="recipe hub"]')->each(function ($node) {
+    $crawler->filter('a["data-internal-referrer-link"="recipe hub"]')->each(function ($node) {
       global $title;
       d($node,$node->html());
       exit;
