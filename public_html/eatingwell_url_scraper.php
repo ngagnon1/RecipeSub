@@ -4,8 +4,6 @@ require_once( $_SERVER['DOCUMENT_ROOT'].'/includes/autoload.php' );
 
 use Goutte\Client;
 
-echo 'asdf';
-
 $conn = DbConn::getConn();
 exit;
 
