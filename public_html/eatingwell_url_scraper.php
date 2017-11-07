@@ -17,7 +17,7 @@ $client->setClient($gzl);
 for( $i=0; $i< 100; $i++ ){
   $statement = $pdo->prepare("SELECT * FROM EatingWellRecipe WHERE RecipeNumber=?");
   $recipe_id = 261291+$i;
-  $statement->execute($recipe_id);
+  $statement->execute([$recipe_id]);
   d($statement->fetch());
   exit;
   $crawler = $client->request('GET', "http://www.eatingwell.com/recipe/$recipe_id");
