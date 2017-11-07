@@ -24,6 +24,8 @@ for( $i=0; $i< 100; $i++ ){
     $crawler = $client->request('GET', $url);
     $urls = array();
     $crawler->filter('a[data-internal-referrer-link="recipe hub"]')->each(function ($node) {
+      global $pdo;
+      global $page_id;
       $url = $node->attr("href");
       $id_pattern = '/.*\/recipe\/([0-9]+).*/';
       if( preg_match( $id_pattern, $url ) ){
