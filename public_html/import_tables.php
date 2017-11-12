@@ -18,9 +18,9 @@ while( $line = fgetcsv($handle) ){
   }
   if( count($out) > 1000 ){
     $sql = "INSERT INTO train_sample1 ( ".implode( "),(", $out ).")";
-    $pdo->query($sql)->execute();
     d($sql);
     exit;
+    $pdo->query($sql)->execute();
   }
 }
 
