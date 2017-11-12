@@ -6,6 +6,8 @@ $line = fgetcsv($handle);
 
 
 $out = array();
+$pdo = DbConn::getPdo();
+$cnt = 0;
 while( $line = fgetcsv($handle) ){
   if( $cnt++ > 0 ){
     $line[1] = "\"".date('Y-m-d',strtotime($line[1]))."\"";
@@ -16,6 +18,7 @@ while( $line = fgetcsv($handle) ){
   }
   if( count($out) > 1000 ){
     $sql = "INSERT INTO train_sample1 ( ".implode( "),(", $out ).")";
+    $pdo->query($sql)->execute();
     d($sql);
     exit;
   }
