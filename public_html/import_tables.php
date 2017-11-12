@@ -8,6 +8,7 @@ $line = fgetcsv($handle);
 $out = array();
 while( $line = fgetcsv($handle) ){
   if( $cnt++ > 0 ){
+    $line[1] = date('Y-m-d',strtotime($line[1]));
     d($handle,$line);
     exit;
   }
