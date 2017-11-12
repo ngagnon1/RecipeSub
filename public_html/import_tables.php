@@ -13,11 +13,11 @@ while( $line = fgetcsv($handle) ){
       $l = $l == ""? "NULL": $l;
     }
     $out = implode( ", ", $line );
-    d($out);
-    exit;
   }
   if( count($array) > 1000 ){
-    //$sql = "INSERT INTO train_sample1 ( ".
+    $sql = "INSERT INTO train_sample1 ( ".implode( "),(", $out ).")";
+    d($sql);
+    exit;
   }
 }
 
