@@ -17,7 +17,7 @@ while( $line = fgetcsv($handle) ){
     $out[] = implode( ", ", $line );
   }
   if( count($out) > 1000 ){
-    $sql = "INSERT INTO train_sample1 ( ".implode( "),(", $out ).")";
+    $sql = "INSERT INTO VALUES train_sample1 ( ".implode( "),(", $out ).")";
     d($sql);
     exit;
     $pdo->query($sql)->execute();
