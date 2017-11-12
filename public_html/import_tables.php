@@ -9,8 +9,12 @@ $out = array();
 while( $line = fgetcsv($handle) ){
   if( $cnt++ > 0 ){
     $line[1] = "\"".date('Y-m-d',strtotime($line[1]))."\"";
-    d($handle,$line);
+    $out = implode( ", ", $line );
+    d($out);
     exit;
+  }
+  if( count($array) > 1000 ){
+    $sql = "INSERT INTO train_sample1 ( ".
   }
 }
 
