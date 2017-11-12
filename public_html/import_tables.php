@@ -12,9 +12,9 @@ while( $line = fgetcsv($handle) ){
     foreach( $line as &$l ){
       $l = $l == ""? "NULL": $l;
     }
-    $out = implode( ", ", $line );
+    $out[] = implode( ", ", $line );
   }
-  if( count($array) > 1000 ){
+  if( count($out) > 1000 ){
     $sql = "INSERT INTO train_sample1 ( ".implode( "),(", $out ).")";
     d($sql);
     exit;
