@@ -1,6 +1,6 @@
 <?php
       require_once "includes/autoload.php"; 
-$handle = fopen( "grocery_data/train_sample1.csv" );
+$handle = fopen( "grocery_data/train_sample1.csv", "r" );
 
 d($handle);
 
