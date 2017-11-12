@@ -14,7 +14,7 @@ while( $line = fgetcsv($handle) ){
     exit;
   }
   if( count($array) > 1000 ){
-    $sql = "INSERT INTO train_sample1 ( ".
+    //$sql = "INSERT INTO train_sample1 ( ".
   }
 }
 
