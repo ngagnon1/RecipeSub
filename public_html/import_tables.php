@@ -18,11 +18,13 @@ while( $line = fgetcsv($handle) ){
   }
   if( count($out) > 1000 ){
     $sql = "INSERT INTO VALUES train_sample1 ( ".implode( "),(", $out ).")";
-    d($sql);
-    exit;
+    if( $cnt % 10000 == 0 ) echo $cnt."<br/>";
     $pdo->query($sql)->execute();
+    $out = array();
   }
 }
+$sql = "INSERT INTO VALUES train_sample1 ( ".implode( "),(", $out ).")";
+$pdo->query($sql)->execute();
 
 
 //$data=file_get_lines("grocery_data/train_sample1.csv");
