@@ -17,13 +17,13 @@ while( $line = fgetcsv($handle) ){
     $out[] = implode( ", ", $line );
   }
   if( count($out) > 1000 ){
-    $sql = "INSERT INTO VALUES train_sample1 ( ".implode( "),(", $out ).")";
+    $sql = "INSERT INTO train_sample1 VALUES ( ".implode( "),(", $out ).")";
     if( $cnt % 10000 == 0 ) echo $cnt."<br/>";
     $pdo->query($sql)->execute();
     $out = array();
   }
 }
-$sql = "INSERT INTO VALUES train_sample1 ( ".implode( "),(", $out ).")";
+$sql = "INSERT INTO train_sample1 VALUES ( ".implode( "),(", $out ).")";
 $pdo->query($sql)->execute();
 
 
