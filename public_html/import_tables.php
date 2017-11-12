@@ -22,7 +22,7 @@ while( $line = fgetcsv($handle) ){
     $dumbcounter++;
     $sql = "INSERT INTO train_sample1 VALUES ( ".implode( "),(", $out ).")";
     //d($sql,$out);
-    if ($dumbcounter >1) exit;
+   // if ($dumbcounter >1) exit;
     if( $cnt % 10000 == 0 ) echo $cnt."<br/>";
     $pdo->query($sql);//->execute();
     $out = array();
