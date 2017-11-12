@@ -9,6 +9,9 @@ $out = array();
 while( $line = fgetcsv($handle) ){
   if( $cnt++ > 0 ){
     $line[1] = "\"".date('Y-m-d',strtotime($line[1]))."\"";
+    foreach( $line as &$l ){
+      $l = $l == ""? "NULL": $l;
+    }
     $out = implode( ", ", $line );
     d($out);
     exit;
