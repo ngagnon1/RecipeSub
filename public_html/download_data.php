@@ -15,5 +15,3 @@ $pdo = DbConn::getPdo();
 $sql = "INSERT INTO train_sample1 VALUES ( ".implode( "),(", $out ).")";
 
 $handle = fopen( "grocery_data/train_sample1.csv", "r" );
-
-fputcsv
