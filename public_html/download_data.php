@@ -4,7 +4,7 @@ require_once "includes/autoload.php";
 
 set_time_limit(30*60);
 
-$handle = fopen( "grocery_data/grocdbkitten.csv", "rw" );
+$handle = fopen( "grocery_data/grocdbkitten.csv", "w" );
 
 $pdo = DbConn::getPdo();
 
