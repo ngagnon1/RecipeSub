@@ -4,14 +4,13 @@ require_once "includes/autoload.php";
 
 set_time_limit(30*60);
 
-
-$handle = fopen( "grocery_data/train_sample1.csv", "rw" );
-d($handle);
-
-exit;
+$handle = fopen( "grocery_data/grocdbkitten.csv", "rw" );
 
 $pdo = DbConn::getPdo();
 
-$sql = "INSERT INTO train_sample1 VALUES ( ".implode( "),(", $out ).")";
+$offset = $_REQUEST['offset'];
 
-$handle = fopen( "grocery_data/train_sample1.csv", "r" );
+$sql = "SELECT * FROM Groc_db_v LIMIT $offset, 100";
+
+$pdo->query($sql)->execute();
+
