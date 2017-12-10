@@ -12,6 +12,6 @@ $offset = $_REQUEST['offset'];
 
 $sql = "SELECT * FROM Groc_df_v LIMIT $offset, 100";
 
-$pdo->query($sql)->execute();
+$fetcher  = $pdo->query($sql)->execute();
 
-d($pdo->fetchAll());
+d($fetcher->fetchAll());
