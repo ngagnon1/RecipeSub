@@ -4,7 +4,7 @@ require_once "includes/autoload.php";
 
 set_time_limit(30*60);
 
-$handle = fopen( "grocery_data/groc_df_v.csv", "w" );
+$handle = fopen( "grocery_data/groc_df_v.csv", "w+" );
 
 $pdo = DbConn::getPdo();
 
@@ -15,7 +15,6 @@ $sql = "SELECT * FROM Groc_df_v LIMIT $offset, 100";
 $fetcher  = $pdo->query($sql);
 
 
-fputcsv( $handle, array("a","b") );
 fputcsv( $handle, array("a","b") );
 d(
   $fetcher->fetchAll()
