@@ -18,7 +18,6 @@ $fetcher  = $pdo->query($sql);
 while( $r = $fetcher->fetch() ){
   fputcsv( $handle, array_keys($r) );
   exit;
-  fputcsv( $handle, array_keys(reset($)) );
 }
 d(
   $fetcher->fetchAll()
