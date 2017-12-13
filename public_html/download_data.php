@@ -16,6 +16,7 @@ $fetcher  = $pdo->query($sql);
 
 
 fputcsv( $handle, array("a","b") );
+fputcsv( $handle, array("a","b") );
 d(
   $fetcher->fetchAll()
   ,file_get_contents( $_SERVER['DOCUMENT_ROOT'].'/grocery_data/groc_df_v.csv' )
