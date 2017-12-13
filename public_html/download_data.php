@@ -10,7 +10,7 @@ $pdo = DbConn::getPdo();
 
 $offset = $_REQUEST['offset'];
 
-$sql = "SELECT * FROM Groc_df_v LIMIT $offset, 900";
+$sql = "SELECT * FROM Groc_df_v LIMIT $offset, 9000";
 
 $fetcher  = $pdo->query($sql);
 
