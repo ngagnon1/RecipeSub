@@ -6,7 +6,7 @@ echo 'hi 3';
 
 $pdo = DbConn::getPdo();
 
-$sql = "SELECT * FROM EatingWellRecipeIngredientTmpa WHERE PartB IS NULL LIMIT 100";
+$sql = "SELECT * FROM EatingWellRecipeIngredientTmpa WHERE PartB IS NULL LIMIT 900, 100";
 
 $fetcher  = $pdo->query($sql);
 
