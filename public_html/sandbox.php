@@ -16,7 +16,7 @@ while( $r = $fetcher->fetch() ){
   $pattern = '/^[0-9]+\s+([\w\-]+).*/';
   if( preg_match( $pattern, $r['IngredientText'] ) ){
     $measurement = preg_replace( $pattern, '$1', $r['IngredientText'] );
-    if( !in_array($measurements,$measurement) ){
+    if( !in_array($measurement,$measurements) ){
       $measurements[] = $measurement;
     }
   }
