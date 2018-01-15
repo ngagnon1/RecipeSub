@@ -26,4 +26,5 @@ while( $r = $fetcher->fetch() ){
     }
   }
 }
+d($out);
 d($measurements);
