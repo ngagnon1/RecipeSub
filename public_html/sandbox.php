@@ -26,7 +26,7 @@ while( $r = $fetcher->fetch() ){
         "remainder" => $remainder,
       );
       $insert_q = $pdo->prepare( "INSERT INTO EatingWellRecipeIngredientTmpa ( EatingWellRecipeIngredientId, PartA, PartB, PartC ) VALUES ( ?, ?, ?, ? )" );
-      $insert_q->execute( $r['EatingWellRecipeIngredientId'], $r['IngredientText'], $measurement, $remainder );
+      $insert_q->execute( array( $r['EatingWellRecipeIngredientId'], $r['IngredientText'], $measurement, $remainder ) );
     }
   }
 }
