@@ -12,7 +12,7 @@ $fetcher  = $pdo->query($sql);
 
 $out = array();
 while( $r = $fetcher->fetch() ){
-  $new = preg_replace( '/[^A-Z0-9 ]/', ' ', $r['PartA'] );
+  $new = preg_replace( '/[^A-Za-z0-9 ]/', ' ', $r['PartA'] );
   $out = array(
     "orig" => $r['PartA'],
     "new" => $new,
