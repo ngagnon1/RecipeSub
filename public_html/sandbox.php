@@ -14,7 +14,7 @@ $out = array();
 while( $r = $fetcher->fetch() ){
   $new = preg_replace( '/[^A-Z0-9 ]/', ' ', $r['PartA'] );
   $out = array(
-    "orig" => $r['IngredientText'],
+    "orig" => $r['PartA'],
     "new" => $new,
   );
 }
