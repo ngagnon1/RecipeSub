@@ -6,13 +6,23 @@ echo 'hi 3';
 
 $pdo = DbConn::getPdo();
 
-$sql = "SELECT * FROM EatingWellRecipeIngredient LIMIT 1000";
+$sql = "SELECT * FROM EatingWellRecipeIngredientTmpa WHERE PartB IS NULL LIMIT 1000";
 
 $fetcher  = $pdo->query($sql);
 
+$out = array();
+while( $r = $fetcher->fetch() ){
+  $new = preg_replace( '/[^A-Z0-9 ]/', ' ', $r['IngredientText'] );
+  $out = array(
+    "orig" => $r['IngredientText'],
+    "new" => $new,
+  );
+}
+d($out);
+exit;
+
 $cnt = 0;
 $measurements = array();
-$out = array();
 while( $r = $fetcher->fetch() ){
   $pattern = '/^[0-9]+\s+([\w\-]+)(.*)/';
   if( preg_match( $pattern, $r['IngredientText'] ) ){
