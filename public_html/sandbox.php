@@ -6,7 +6,7 @@ echo 'hi 3';
 
 $pdo = DbConn::getPdo();
 
-$sql = "SELECT * FROM Groc_df_v LIMIT 10";
+$sql = "SELECT * FROM EatingWellRecipeIngredient LIMIT 10";
 
 $fetcher  = $pdo->query($sql);
 
