@@ -13,6 +13,7 @@ $fetcher  = $pdo->query($sql);
 $out = array();
 while( $r = $fetcher->fetch() ){
   $new = strtolower( trim( preg_replace( '/ +/', ' ', preg_replace( '/[^A-Za-z ]/', ' ', $r['PartA'] ) ) ) );
+  $new = preg_replace( '/\(.*\)/', '', $new );
   $out[] = array(
     "orig" => $r['PartA'],
     "new" => $new,
