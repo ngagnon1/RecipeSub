@@ -13,10 +13,12 @@ $fetcher  = $pdo->query($sql);
 $out = array();
 while( $r = $fetcher->fetch() ){
   $new = preg_replace( '/[^A-Za-z0-9 ]/', ' ', $r['PartA'] );
-  $out = array(
+  $out[] = array(
     "orig" => $r['PartA'],
     "new" => $new,
   );
+  $update_q = $pdo->prepare( "UPDATE EatingWellRecipeIngredientTmpa Set PartB = ? WHERE EatingWellRecipeIngredientId = ?" );
+  $update_q->execute( array( $r['EatingWellRecipeIngredientId'], $new ) );
 }
 d($out);
 exit;
