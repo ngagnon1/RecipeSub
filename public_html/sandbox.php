@@ -19,10 +19,10 @@ while( $r = $fetcher->fetch() ){
     $measurement = preg_replace( $pattern, '$1', $r['IngredientText'] );
     if( !in_array($measurement,$measurements) ){
       $measurements[] = $measurement;
-      //$out[] = array(
-        //"original" => $r['IngredientText'],
-        //"extract" => $measurement;
-      //);
+      $out[] = array(
+        "original" => $r['IngredientText'],
+        "extract" => $measurement,
+      );
     }
   }
 }
