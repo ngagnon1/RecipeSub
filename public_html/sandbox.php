@@ -17,7 +17,10 @@ while( $r = $fetcher->fetch() ){
   if( preg_match( $pattern, $r['IngredientText'] ) ){
     $measurement = preg_replace( $pattern, '$1', $r['IngredientText'] );
     if( !in_array($measurement,$measurements) ){
-      $measurements[] = $measurement;
+      $measurements[] = array(
+        "original" => $r['IngredientText'],
+        "extract" => $measurement;
+      );
     }
   }
 }
