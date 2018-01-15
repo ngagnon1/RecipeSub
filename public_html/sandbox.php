@@ -8,7 +8,6 @@ $pdo = DbConn::getPdo();
 
 $start = microtime(true);
 $cnt = 0;
-$out = array();
 while( microtime(true) - $start < 60 ){
   $cnt++;
 
@@ -21,15 +20,11 @@ while( microtime(true) - $start < 60 ){
     $new = preg_replace( '/\(.*\)/', '', $new );
     $new = strtolower( preg_replace( '/ +/', ' ', preg_replace( '/[^A-Za-z ]/', ' ', $new ) ) );
     $new = trim( $new );
-    $out[] = array(
-      "orig" => $r['PartA'],
-      "new" => $new,
-    );
     $update_q = $pdo->prepare( "UPDATE EatingWellRecipeIngredientTmpa Set PartB = ? WHERE EatingWellRecipeIngredientId = ?" );
     $update_q->execute( array( $new, $r['EatingWellRecipeIngredientId'] ) );
   }
 }
-d(reset($out),$cnt);
+d($cnt);
 exit;
 
 $cnt = 0;
