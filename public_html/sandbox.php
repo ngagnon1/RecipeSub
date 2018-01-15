@@ -6,14 +6,15 @@ echo 'hi 3';
 
 $pdo = DbConn::getPdo();
 
-$sql = "SELECT * FROM EatingWellRecipeIngredientTmpa WHERE PartB IS NULL LIMIT 1000";
+$sql = "SELECT * FROM EatingWellRecipeIngredientTmpa WHERE PartB IS NULL LIMIT 100";
 
 $fetcher  = $pdo->query($sql);
 
 $out = array();
 while( $r = $fetcher->fetch() ){
-  $new = strtolower( preg_replace( '/ +/', ' ', preg_replace( '/[^A-Za-z ]/', ' ', $r['PartA'] ) ) );
+  $new = $r['PartA'];
   $new = preg_replace( '/\(.*\)/', '', $new );
+  $new = strtolower( preg_replace( '/ +/', ' ', preg_replace( '/[^A-Za-z ]/', ' ', $new ) ) );
   $new = trim( $new );
   $out[] = array(
     "orig" => $r['PartA'],
