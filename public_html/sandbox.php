@@ -21,7 +21,7 @@ while( $r = $fetcher->fetch() ){
     "new" => $new,
   );
   $update_q = $pdo->prepare( "UPDATE EatingWellRecipeIngredientTmpa Set PartB = ? WHERE EatingWellRecipeIngredientId = ?" );
-  $update_q->execute( array( $r['EatingWellRecipeIngredientId'], $new ) );
+  $update_q->execute( array( $new, $r['EatingWellRecipeIngredientId'] ) );
 }
 d(reset($out));
 exit;
