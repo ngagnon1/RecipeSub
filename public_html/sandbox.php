@@ -6,24 +6,30 @@ echo 'hi 3';
 
 $pdo = DbConn::getPdo();
 
-$sql = "SELECT * FROM EatingWellRecipeIngredientTmpa WHERE PartB IS NULL LIMIT 900, 100";
-
-$fetcher  = $pdo->query($sql);
-
+$start = microtime(true);
+$cnt = 0;
 $out = array();
-while( $r = $fetcher->fetch() ){
-  $new = $r['PartA'];
-  $new = preg_replace( '/\(.*\)/', '', $new );
-  $new = strtolower( preg_replace( '/ +/', ' ', preg_replace( '/[^A-Za-z ]/', ' ', $new ) ) );
-  $new = trim( $new );
-  $out[] = array(
-    "orig" => $r['PartA'],
-    "new" => $new,
-  );
-  $update_q = $pdo->prepare( "UPDATE EatingWellRecipeIngredientTmpa Set PartB = ? WHERE EatingWellRecipeIngredientId = ?" );
-  $update_q->execute( array( $new, $r['EatingWellRecipeIngredientId'] ) );
+while( microtime(true) - $start < 60 ){
+  $cnt++;
+
+  $sql = "SELECT * FROM EatingWellRecipeIngredientTmpa WHERE PartB IS NULL LIMIT 1000";
+
+  $fetcher  = $pdo->query($sql);
+
+  while( $r = $fetcher->fetch() ){
+    $new = $r['PartA'];
+    $new = preg_replace( '/\(.*\)/', '', $new );
+    $new = strtolower( preg_replace( '/ +/', ' ', preg_replace( '/[^A-Za-z ]/', ' ', $new ) ) );
+    $new = trim( $new );
+    $out[] = array(
+      "orig" => $r['PartA'],
+      "new" => $new,
+    );
+    $update_q = $pdo->prepare( "UPDATE EatingWellRecipeIngredientTmpa Set PartB = ? WHERE EatingWellRecipeIngredientId = ?" );
+    $update_q->execute( array( $new, $r['EatingWellRecipeIngredientId'] ) );
+  }
 }
-d(reset($out));
+d(reset($out),$cnt);
 exit;
 
 $cnt = 0;
